@@ -41,7 +41,8 @@ import org.apache.logging.log4j.Logger;
  */
 @Mod(modid = ModularMachinery.MODID, name = ModularMachinery.NAME, version = ModularMachinery.VERSION,
         dependencies = "required-after:forge@[14.21.0.2371,);" +
-                "required-after:crafttweaker@[4.0.4,);" +
+                "after:crafttweaker@[4.0.4,);" +
+                //"after:groovyscript@[1.0.0,);" + // TODO wait for grs 1.0.1
                 "after:zenutils@[1.12.8,);" +
                 "after:jei@[4.13.1.222,);" +
                 "after:gregtech@[2.7.4-beta,);" +

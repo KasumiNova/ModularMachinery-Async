@@ -11,7 +11,7 @@ package hellfirepvp.modularmachinery.common.crafting;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.gson.*;
-import crafttweaker.util.IEventHandler;
+import github.kasuminova.mmce.common.event.machine.IEventHandler;
 import github.kasuminova.mmce.common.event.recipe.RecipeEvent;
 import hellfirepvp.modularmachinery.ModularMachinery;
 import hellfirepvp.modularmachinery.common.crafting.command.RecipeCommandContainer;

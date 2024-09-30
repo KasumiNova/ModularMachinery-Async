@@ -1,9 +1,9 @@
 package hellfirepvp.modularmachinery.common.integration.crafttweaker.modifier;
 
-import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
+import github.kasuminova.mmce.common.integration.Logger;
 import hellfirepvp.modularmachinery.common.modifier.MultiBlockModifierReplacement;
 import hellfirepvp.modularmachinery.common.modifier.RecipeModifier;
 import hellfirepvp.modularmachinery.common.util.BlockArray;
@@ -64,7 +64,7 @@ public class MultiBlockModifierBuilder {
     @ZenMethod
     public MultiBlockModifierReplacement build() {
         if (blockArray == null) {
-            CraftTweakerAPI.logError("BlockArray cannot be null!");
+            Logger.error("BlockArray cannot be null!");
             return null;
         } else {
             return new MultiBlockModifierReplacement(modifierName, blockArray, modifiers, descriptions, descriptiveStack);

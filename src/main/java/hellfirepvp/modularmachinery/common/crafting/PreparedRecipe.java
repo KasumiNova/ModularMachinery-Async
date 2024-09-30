@@ -8,7 +8,7 @@
 
 package hellfirepvp.modularmachinery.common.crafting;
 
-import crafttweaker.util.IEventHandler;
+import github.kasuminova.mmce.common.event.machine.IEventHandler;
 import github.kasuminova.mmce.common.event.recipe.RecipeEvent;
 import hellfirepvp.modularmachinery.common.crafting.helper.ComponentRequirement;
 import net.minecraft.util.ResourceLocation;

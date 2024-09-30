@@ -1,6 +1,6 @@
 package hellfirepvp.modularmachinery.common.crafting.adapter.nco;
 
-import crafttweaker.util.IEventHandler;
+import github.kasuminova.mmce.common.event.machine.IEventHandler;
 import github.kasuminova.mmce.common.event.recipe.RecipeEvent;
 import hellfirepvp.modularmachinery.common.crafting.MachineRecipe;
 import hellfirepvp.modularmachinery.common.crafting.helper.ComponentRequirement;

@@ -1,7 +1,7 @@
 package hellfirepvp.modularmachinery.common.integration.crafttweaker;
 
+import com.cleanroommc.groovyscript.api.GroovyBlacklist;
 import com.google.gson.JsonParseException;
-import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.block.IBlockState;
 import crafttweaker.api.data.IData;
@@ -16,6 +16,7 @@ import github.kasuminova.mmce.common.event.machine.MachineStructureFormedEvent;
 import github.kasuminova.mmce.common.event.machine.MachineStructureUpdateEvent;
 import github.kasuminova.mmce.common.event.machine.MachineTickEvent;
 import github.kasuminova.mmce.common.event.machine.SmartInterfaceUpdateEvent;
+import github.kasuminova.mmce.common.integration.Logger;
 import hellfirepvp.modularmachinery.ModularMachinery;
 import hellfirepvp.modularmachinery.common.integration.crafttweaker.helper.AdvancedBlockCheckerCT;
 import hellfirepvp.modularmachinery.common.machine.DynamicMachine;
@@ -41,6 +42,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 
 import java.util.*;
 
+@GroovyBlacklist
 @ZenRegister
 @ZenClass("mods.modularmachinery.MachineBuilder")
 public class MachineBuilder {
@@ -286,7 +288,7 @@ public class MachineBuilder {
             stateDescriptorList.add(IBlockStateDescriptor.of(block));
             addSingleBlockModifier(new BlockPos(x, y, z), new BlockArray.BlockInformation(stateDescriptorList), description, modifiers);
         } else {
-            CraftTweakerAPI.logError("[ModularMachinery] " + item.getDisplayName() + " cannot convert to Block!");
+            Logger.error(item.getDisplayName() + " cannot convert to Block!");
         }
 
         return this;
@@ -310,7 +312,7 @@ public class MachineBuilder {
             stateDescriptorList.add(BlockArray.BlockInformation.getDescriptor(blockName));
             addSingleBlockModifier(new BlockPos(x, y, z), new BlockArray.BlockInformation(stateDescriptorList), description, modifiers);
         } catch (JsonParseException e) {
-            CraftTweakerAPI.logError("[ModularMachinery] " + blockName + " is invalid block!", e);
+            Logger.error(blockName + " is invalid block!", e);
         }
 
         return this;
@@ -337,7 +339,7 @@ public class MachineBuilder {
         if (!machine.hasSmartInterfaceType(type.getType())) {
             machine.addSmartInterfaceType(type);
         } else {
-            CraftTweakerAPI.logWarning("[ModularMachinery] DynamicMachine `" + machine.getRegistryName() + "` is already has SmartInterfaceType `" + type.getType() + "`!");
+            Logger.warn("DynamicMachine `" + machine.getRegistryName() + "` is already has SmartInterfaceType `" + type.getType() + "`!");
         }
         return this;
     }
@@ -347,7 +349,7 @@ public class MachineBuilder {
      */
     @ZenMethod
     public MachineBuilder addStructureFormedHandler(IEventHandler<MachineStructureFormedEvent> function) {
-        machine.addMachineEventHandler(MachineStructureFormedEvent.class, function);
+        machine.addMachineEventHandler(MachineStructureFormedEvent.class, function::handle);
         return this;
     }
 
@@ -356,7 +358,7 @@ public class MachineBuilder {
      */
     @ZenMethod
     public MachineBuilder addStructureUpdateHandler(IEventHandler<MachineStructureUpdateEvent> function) {
-        machine.addMachineEventHandler(MachineStructureUpdateEvent.class, function);
+        machine.addMachineEventHandler(MachineStructureUpdateEvent.class, function::handle);
         return this;
     }
 
@@ -365,7 +367,7 @@ public class MachineBuilder {
      */
     @ZenMethod
     public MachineBuilder addTickHandler(IEventHandler<MachineTickEvent> function) {
-        machine.addMachineEventHandler(MachineTickEvent.class, function);
+        machine.addMachineEventHandler(MachineTickEvent.class, function::handle);
         return this;
     }
 
@@ -377,7 +379,7 @@ public class MachineBuilder {
         if (FMLCommonHandler.instance().getSide().isServer()) {
             return this;
         }
-        machine.addMachineEventHandler(ControllerGUIRenderEvent.class, function);
+        machine.addMachineEventHandler(ControllerGUIRenderEvent.class, function::handle);
         return this;
     }
 
@@ -390,7 +392,7 @@ public class MachineBuilder {
         if (FMLCommonHandler.instance().getSide().isServer()) {
             return this;
         }
-        machine.addMachineEventHandler(ControllerModelAnimationEvent.class, function);
+        machine.addMachineEventHandler(ControllerModelAnimationEvent.class, function::handle);
         return this;
     }
 
@@ -403,7 +405,7 @@ public class MachineBuilder {
         if (FMLCommonHandler.instance().getSide().isServer()) {
             return this;
         }
-        machine.addMachineEventHandler(ControllerModelGetEvent.class, function);
+        machine.addMachineEventHandler(ControllerModelGetEvent.class, function::handle);
         return this;
     }
 
@@ -412,7 +414,7 @@ public class MachineBuilder {
      */
     @ZenMethod
     public MachineBuilder addSmartInterfaceUpdateHandler(IEventHandler<SmartInterfaceUpdateEvent> function) {
-        machine.addMachineEventHandler(SmartInterfaceUpdateEvent.class, function);
+        machine.addMachineEventHandler(SmartInterfaceUpdateEvent.class, function::handle);
         return this;
     }
 

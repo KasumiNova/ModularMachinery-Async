@@ -1,7 +1,6 @@
 package github.kasuminova.mmce.common.event.machine;
 
 import crafttweaker.annotations.ZenRegister;
-import crafttweaker.util.IEventHandler;
 import github.kasuminova.mmce.common.handler.UpgradeMachineEventHandler;
 import github.kasuminova.mmce.common.helper.IMachineController;
 import hellfirepvp.modularmachinery.ModularMachinery;
@@ -69,7 +68,7 @@ public class MachineEvent extends Event {
         }
 
         for (IEventHandler<MachineEvent> handler : handlers) {
-            handler.handle(this);
+            handler.invoke(this);
             if (isCanceled()) {
                 break;
             }

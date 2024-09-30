@@ -1,12 +1,12 @@
 package hellfirepvp.modularmachinery.common.integration.crafttweaker;
 
-import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.item.IngredientStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.api.oredict.IOreDictEntry;
+import github.kasuminova.mmce.common.integration.Logger;
 import github.kasuminova.mmce.common.itemtype.ChancedIngredientStack;
 import hellfirepvp.modularmachinery.common.integration.crafttweaker.helper.AdvancedItemCheckerCT;
 import hellfirepvp.modularmachinery.common.integration.crafttweaker.helper.AdvancedItemModifierCT;
@@ -27,7 +27,7 @@ public class IngredientArrayPrimer {
         if (input instanceof final IItemStack stackCT) {
             ItemStack stackMC = CraftTweakerMC.getItemStack(input);
             if (stackMC.isEmpty()) {
-                CraftTweakerAPI.logError("[ModularMachinery] ItemStack not found/unknown item: " + stackMC);
+                Logger.error("ItemStack not found/unknown item: " + stackMC);
                 return this;
             }
             ChancedIngredientStack ingredientStack = new ChancedIngredientStack(stackMC);
@@ -66,7 +66,7 @@ public class IngredientArrayPrimer {
                 lastIngredientStack.minCount = min;
                 lastIngredientStack.maxCount = max;
             } else {
-                CraftTweakerAPI.logWarning("[ModularMachinery] `min` cannot larger than `max`!");
+                Logger.warn("`min` cannot larger than `max`!");
             }
         }
         return this;
@@ -101,7 +101,7 @@ public class IngredientArrayPrimer {
     @ZenMethod
     @Deprecated
     public IngredientArrayPrimer build() {
-        CraftTweakerAPI.logWarning("[ModularMachinery] IngredientArrayPrimer#build is deprecated, it will be removed in future version.");
+        Logger.warn("IngredientArrayPrimer#build is deprecated, it will be removed in future version.");
         return this;
     }
 

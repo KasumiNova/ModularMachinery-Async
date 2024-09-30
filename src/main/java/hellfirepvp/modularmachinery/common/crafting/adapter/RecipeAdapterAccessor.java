@@ -10,7 +10,7 @@ package hellfirepvp.modularmachinery.common.crafting.adapter;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gson.*;
-import crafttweaker.util.IEventHandler;
+import github.kasuminova.mmce.common.event.machine.IEventHandler;
 import github.kasuminova.mmce.common.event.recipe.RecipeEvent;
 import hellfirepvp.modularmachinery.ModularMachinery;
 import hellfirepvp.modularmachinery.common.crafting.MachineRecipe;

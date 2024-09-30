@@ -19,6 +19,7 @@ import net.minecraftforge.fml.common.ModContainer;
  * Date: 02.03.2019 / 17:42
  */
 public enum Mods {
+    GROOVYSCRIPT("groovyscript"),
     CRAFTTWEAKER("crafttweaker"),
     JEI("jei"),
     GREGTECH("gregtech"),

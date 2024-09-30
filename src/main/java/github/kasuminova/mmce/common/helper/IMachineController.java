@@ -16,12 +16,19 @@ import hellfirepvp.modularmachinery.common.machine.RecipeThread;
 import hellfirepvp.modularmachinery.common.modifier.RecipeModifier;
 import hellfirepvp.modularmachinery.common.tiles.base.TileMultiblockMachineController;
 import hellfirepvp.modularmachinery.common.util.SmartInterfaceData;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenGetter;
 import stanhebben.zenscript.annotations.ZenMethod;
 import stanhebben.zenscript.annotations.ZenSetter;
 
 import javax.annotation.Nullable;
+import java.util.function.Predicate;
 
 @ZenRegister
 @ZenClass("mods.modularmachinery.IMachineController")
@@ -32,32 +39,44 @@ public interface IMachineController {
      *
      * @return 世界
      */
+    @Optional.Method(modid = "crafttweaker")
     @ZenGetter("world")
     IWorld getIWorld();
+
+    World getWorld();
 
     /**
      * 获取控制器方块。
      *
      * @return IBlockState
      */
+    @Optional.Method(modid = "crafttweaker")
     @ZenGetter("blockState")
     IBlockState getIBlockState();
+
+    net.minecraft.block.state.IBlockState getBlockState();
 
     /**
      * 获取控制器处于世界中的朝向。
      *
      * @return IFacing
      */
+    @Optional.Method(modid = "crafttweaker")
     @ZenGetter("facing")
     IFacing getFacing();
+
+    EnumFacing getEnumFacing();
 
     /**
      * 获取控制器所在的坐标
      *
      * @return 坐标
      */
+    @Optional.Method(modid = "crafttweaker")
     @ZenGetter("pos")
     IBlockPos getIPos();
+
+    BlockPos getPos();
 
     /**
      * 根据控制器的朝向，将给定的坐标旋转到控制器朝向。
@@ -137,6 +156,7 @@ public interface IMachineController {
      *
      * @return IData
      */
+    @Optional.Method(modid = "crafttweaker")
     @ZenGetter("customData")
     IData getCustomData();
 
@@ -145,8 +165,13 @@ public interface IMachineController {
      *
      * @param data IData
      */
+    @Optional.Method(modid = "crafttweaker")
     @ZenSetter("customData")
     void setCustomData(IData data);
+
+    NBTTagCompound getCustomNbt();
+
+    void setCustomNbt(NBTTagCompound nbt);
 
     /**
      * 添加一个半永久 RecipeModifier，会在配方完成的时候自动删除。
@@ -272,8 +297,11 @@ public interface IMachineController {
      * @param blockStack 要判断的方块对应的物品，会被自动转换成对应的 IBlockState，如果转换出现问题会输出错误日志。
      * @return 存在数量。
      */
+    @net.minecraftforge.fml.common.Optional.Method(modid = "crafttweaker")
     @ZenMethod
     int getBlocksInPattern(final IItemStack blockStack);
+
+    int getBlocksInPattern(ItemStack itemStack);
 
     /**
      * 获取控制器的结构中指定方块的存在数量，只能在控制器成型时使用。<br/>
@@ -283,6 +311,7 @@ public interface IMachineController {
      * @param blockStateMatcher 要判断的方块对应的 IBlockStateMatcher
      * @return 存在数量。
      */
+    @net.minecraftforge.fml.common.Optional.Method(modid = "crafttweaker")
     @ZenMethod
     int getBlocksInPattern(final IBlockStateMatcher blockStateMatcher);
 
@@ -305,8 +334,11 @@ public interface IMachineController {
      * @param predicate 自定义判断逻辑。
      * @return 存在数量。
      */
+    @net.minecraftforge.fml.common.Optional.Method(modid = "crafttweaker")
     @ZenMethod
     int getBlocksInPattern(final IBlockStatePredicate predicate);
+
+    int getBlocksInPattern(Predicate<net.minecraft.block.state.IBlockState> predicate);
 
     /**
      * 获取控制器的拥有者，如果玩家不在线则返回 null。

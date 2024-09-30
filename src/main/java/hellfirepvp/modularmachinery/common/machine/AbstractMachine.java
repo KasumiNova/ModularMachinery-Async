@@ -61,9 +61,10 @@ public abstract class AbstractMachine {
 
     @SideOnly(Side.CLIENT)
     public String getLocalizedName() {
-        String localizationKey = registryName.getNamespace() + "." + registryName.getPath();
-        return I18n.hasKey(localizationKey) ? I18n.format(localizationKey) :
-                localizedName != null ? localizedName : localizationKey;
+        String localizationKey = localizedName != null && !localizedName.isEmpty() ?
+                localizedName :
+                registryName.getNamespace() + ".multiblock." + registryName.getPath();
+        return I18n.format(localizationKey);
     }
 
     public void setLocalizedName(String localizedName) {

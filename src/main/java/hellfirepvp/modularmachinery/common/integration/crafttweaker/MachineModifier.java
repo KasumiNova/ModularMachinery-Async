@@ -1,9 +1,9 @@
 package hellfirepvp.modularmachinery.common.integration.crafttweaker;
 
-import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import github.kasuminova.mmce.client.model.DynamicMachineModelRegistry;
 import github.kasuminova.mmce.client.model.MachineControllerModel;
+import github.kasuminova.mmce.common.integration.Logger;
 import github.kasuminova.mmce.common.util.concurrent.Action;
 import hellfirepvp.modularmachinery.ModularMachinery;
 import hellfirepvp.modularmachinery.common.machine.DynamicMachine;
@@ -28,13 +28,13 @@ public class MachineModifier {
         WAIT_FOR_MODIFY.add(() -> {
             DynamicMachine machine = MachineRegistry.getRegistry().getMachine(new ResourceLocation(ModularMachinery.MODID, machineName));
             if (machine == null) {
-                CraftTweakerAPI.logError("Could not find machine `" + machineName + "`!");
+                Logger.error("Could not find machine `" + machineName + "`!");
                 return;
             }
             if (!machine.hasSmartInterfaceType(type.getType())) {
                 machine.addSmartInterfaceType(type);
             } else {
-                CraftTweakerAPI.logWarning("[ModularMachinery] DynamicMachine `" + machine.getRegistryName() + "` is already has SmartInterfaceType `" + type.getType() + "`!");
+                Logger.warn("DynamicMachine `" + machine.getRegistryName() + "` is already has SmartInterfaceType `" + type.getType() + "`!");
             }
         });
     }
@@ -42,12 +42,12 @@ public class MachineModifier {
     @ZenMethod
     public static void setMaxParallelism(String machineName, int maxParallelism) {
         if (maxParallelism < 1) {
-            CraftTweakerAPI.logError("Max Parallelism must larger than 1!");
+            Logger.error("Max Parallelism must larger than 1!");
         }
         WAIT_FOR_MODIFY.add(() -> {
             DynamicMachine machine = MachineRegistry.getRegistry().getMachine(new ResourceLocation(ModularMachinery.MODID, machineName));
             if (machine == null) {
-                CraftTweakerAPI.logError("Could not find machine `" + machineName + "`!");
+                Logger.error("Could not find machine `" + machineName + "`!");
                 return;
             }
             machine.setMaxParallelism(maxParallelism);
@@ -57,12 +57,12 @@ public class MachineModifier {
     @ZenMethod
     public static void setInternalParallelism(String machineName, int parallelism) {
         if (parallelism < 0) {
-            CraftTweakerAPI.logError("Max Parallelism must larger than 0!");
+            Logger.error("Max Parallelism must larger than 0!");
         }
         WAIT_FOR_MODIFY.add(() -> {
             DynamicMachine machine = MachineRegistry.getRegistry().getMachine(new ResourceLocation(ModularMachinery.MODID, machineName));
             if (machine == null) {
-                CraftTweakerAPI.logError("Could not find machine `" + machineName + "`!");
+                Logger.error("Could not find machine `" + machineName + "`!");
                 return;
             }
             machine.setInternalParallelism(parallelism);
@@ -73,12 +73,12 @@ public class MachineModifier {
     public static void setMaxThreads(String machineName, int maxThreads) {
         // Maybe the author only wanted to use the core thread?
         if (maxThreads < 0) {
-            CraftTweakerAPI.logError("Max Threads must larger than or equal 0!");
+            Logger.error("Max Threads must larger than or equal 0!");
         }
         WAIT_FOR_MODIFY.add(() -> {
             DynamicMachine machine = MachineRegistry.getRegistry().getMachine(new ResourceLocation(ModularMachinery.MODID, machineName));
             if (machine == null) {
-                CraftTweakerAPI.logError("Could not find machine `" + machineName + "`!");
+                Logger.error("Could not find machine `" + machineName + "`!");
                 return;
             }
             machine.setMaxThreads(maxThreads);
@@ -90,7 +90,7 @@ public class MachineModifier {
         WAIT_FOR_MODIFY.add(() -> {
             DynamicMachine machine = MachineRegistry.getRegistry().getMachine(new ResourceLocation(ModularMachinery.MODID, machineName));
             if (machine == null) {
-                CraftTweakerAPI.logError("Could not find machine `" + machineName + "`!");
+                Logger.error("Could not find machine `" + machineName + "`!");
                 return;
             }
             machine.addCoreThread(thread);
@@ -106,13 +106,13 @@ public class MachineModifier {
         WAIT_FOR_MODIFY.add(() -> {
             DynamicMachine machine = MachineRegistry.getRegistry().getMachine(new ResourceLocation(ModularMachinery.MODID, machineName));
             if (machine == null) {
-                CraftTweakerAPI.logError("Could not find machine `" + machineName + "`!");
+                Logger.error("Could not find machine `" + machineName + "`!");
                 return;
             }
 
             MachineControllerModel model = DynamicMachineModelRegistry.INSTANCE.getMachineModel(modelName);
             if (model == null) {
-                CraftTweakerAPI.logError("Could not find geo model `" + modelName + "`!");
+                Logger.error("Could not find geo model `" + modelName + "`!");
                 return;
             }
 
@@ -129,7 +129,7 @@ public class MachineModifier {
         WAIT_FOR_MODIFY.add(() -> {
             DynamicMachine machine = MachineRegistry.getRegistry().getMachine(new ResourceLocation(ModularMachinery.MODID, machineName));
             if (machine == null) {
-                CraftTweakerAPI.logError("Could not find machine `" + machineName + "`!");
+                Logger.error("Could not find machine `" + machineName + "`!");
                 return;
             }
             machine.setPrefix(prefixName);

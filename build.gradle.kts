@@ -152,6 +152,7 @@ repositories {
         url = uri("http://jenkins.usrv.eu:8081/nexus/content/groups/public/")
         isAllowInsecureProtocol = true
     }
+    mavenLocal()
 }
 
 dependencies {
@@ -180,9 +181,13 @@ dependencies {
         isTransitive = false
     }
 
-    implementation("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.+")
+    compileOnlyApi("org.jetbrains:annotations:24.1.0")
+    annotationProcessor("org.jetbrains:annotations:24.1.0")
+
+    api("com.cleanroommc:groovyscript:1.1.1") { isTransitive = false }
+    compileOnly("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.+")
     implementation(rfg.deobf("curse.maven:had-enough-items-557549:4810661"))
-    implementation(rfg.deobf("curse.maven:zenutil-401178:5056679"))
+    compileOnly(rfg.deobf("curse.maven:zenutil-401178:5056679"))
     implementation(rfg.deobf("curse.maven:RedstoneFlux-270789:2920436"))
     implementation(rfg.deobf("curse.maven:CodeChickenLib-242818:2779848"))
     implementation(rfg.deobf("curse.maven:brandonscore-231382:3051539"))

@@ -10,8 +10,8 @@ package hellfirepvp.modularmachinery.common.machine;
 
 import com.google.common.collect.Lists;
 import com.google.gson.*;
-import crafttweaker.util.IEventHandler;
 import github.kasuminova.mmce.common.concurrent.RecipeCraftingContextPool;
+import github.kasuminova.mmce.common.event.machine.IEventHandler;
 import github.kasuminova.mmce.common.event.machine.MachineEvent;
 import github.kasuminova.mmce.common.util.BlockPos2ValueMap;
 import github.kasuminova.mmce.common.util.DynamicPattern;

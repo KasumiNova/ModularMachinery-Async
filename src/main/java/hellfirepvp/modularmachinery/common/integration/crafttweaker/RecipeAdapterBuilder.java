@@ -1,7 +1,7 @@
 package hellfirepvp.modularmachinery.common.integration.crafttweaker;
 
-import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
+import github.kasuminova.mmce.common.integration.Logger;
 import hellfirepvp.modularmachinery.ModularMachinery;
 import hellfirepvp.modularmachinery.common.crafting.RecipeRegistry;
 import hellfirepvp.modularmachinery.common.modifier.RecipeModifier;
@@ -68,7 +68,7 @@ public class RecipeAdapterBuilder extends RecipePrimer {
     //----------------------------------------------------------------------------------------------
     @Override
     public RecipePrimer setParallelized(boolean isParallelized) {
-        CraftTweakerAPI.logWarning("[ModularMachinery] RecipeAdapterBuilder cannot set parallelized, it depends on the parent machine recipe!");
+        Logger.warn("RecipeAdapterBuilder cannot set parallelized, it depends on the parent machine recipe!");
         return this;
     }
 }
